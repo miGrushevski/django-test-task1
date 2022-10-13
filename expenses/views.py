@@ -18,6 +18,8 @@ class ExpenseListView(ListView):
             date_from = form.cleaned_data.get('date_from', '')
             date_to = form.cleaned_data.get('date_to', '')
             category = form.cleaned_data.get('category', '')
+            sorted_by = form.cleaned_data.get('sorted_by', '')
+            ordering = form.cleaned_data.get('ordering', '')
             if name:
                 queryset = queryset.filter(name__icontains=name)
             elif date_from and date_to:
@@ -28,6 +30,8 @@ class ExpenseListView(ListView):
                 queryset = queryset.filter(date__gte=date_from)
             elif category:
                 queryset = queryset.filter(category__in=category)
+            elif sorted_by:
+                queryset = queryset.order_by(ordering + sorted_by)
 
         return super().get_context_data(
             form=form,
