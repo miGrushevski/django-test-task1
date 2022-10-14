@@ -45,6 +45,7 @@
 
 {% include "_pagination.html" %}
 <hr>
+{% if summary_per_category %}
 <table border="1">
   <caption>Summary per category</caption>
   <tr>
@@ -69,4 +70,5 @@
   </tr>
 </table>
 <p><b>Total spent amount:</b> {{ total_spent_amount|floatformat:2 }} </p>
+{% endif %}
 {% endblock %}
