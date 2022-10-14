@@ -18,7 +18,7 @@
 				{{obj.name}}
 			</td>
 			<td>
-				{{ obj.get_spent_amount }}
+				{{ obj.get_spent_amount|floatformat:2 }}
 			</td>
 			<td>
 				<a href="{% url 'expenses:category-edit' obj.id %}">edit</a>

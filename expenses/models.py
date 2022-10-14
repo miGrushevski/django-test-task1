@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.db.models import Sum
 
 
 class Category(models.Model):
@@ -9,7 +10,7 @@ class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     def get_spent_amount(self):
-        return sum(self.expenses.values_list("amount", flat=True))
+        return self.expenses.aggregate(Sum('amount'))['amount__sum']
 
     def __str__(self):
         return f'{self.name}'
