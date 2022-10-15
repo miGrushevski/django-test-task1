@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <a href="{% url 'expenses:expense-create' %}">add</a>
@@ -45,6 +44,7 @@
 
 {% include "_pagination.html" %}
 <hr>
+{% if summary_per_category %}
 <table border="1">
   <caption>Summary per category</caption>
   <tr>
@@ -56,4 +56,18 @@
 	{% endfor %}
   </tr>
 </table>
+
+<table border="1">
+  <caption>Summary per year-month</caption>
+  <tr>
+    {% for year_month, total in total_spent_per_year_month.items %}
+	<tr>
+		<td>{{year_month}}:</td>
+		<td>{{total|floatformat:2}}</td>
+	</tr>
+	{% endfor %}
+  </tr>
+</table>
+<p><b>Total spent amount: </b>{{total_spent_amount|floatformat:2}}</p>
+{% endif %}
 {% endblock %}
